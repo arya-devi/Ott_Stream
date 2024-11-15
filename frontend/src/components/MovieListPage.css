@@ -1,0 +1,49 @@
+/* Movie listing page layout */
+.movie-list-page {
+  padding: 20px;
+  background-color: #f3f4f6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Page title styling */
+.page-title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Search bar styling */
+.search-bar-container {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  margin-top: 80px;
+}
+
+.search-bar:focus {
+  border-color: #4cc9fe;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(76, 201, 254, 0.25);
+}
+
+/* Grid layout for movie cards */
+.movie-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  width: 100%;
+  max-width: 1000px;
+}

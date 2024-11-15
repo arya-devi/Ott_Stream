@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit/Add Movie</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f7fa;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            background-color: #ffffff;
+            padding: 20px;
+        }
+
+        .card-body {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-control, .form-control-file {
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+    <%- include('./navbar') %>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center">Edit/Add Movie</h2>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="title">Movie Title</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Enter movie title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="description" id="description" rows="4" placeholder="Enter movie description" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="thumbnail">Thumbnail</label>
+                        <input type="file" class="form-control-file" name="thumbnail" id="thumbnail">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="video">Video File</label>
+                        <input type="file" class="form-control-file" name="video" id="video">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Update/Add Movie</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

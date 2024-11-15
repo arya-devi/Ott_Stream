@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie List</title>
+    <!-- Bootstrap CSS for styling -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7fa;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .table-container {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .btn-add {
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+        }
+
+        .btn-add:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+            text-align: center;
+            padding: 12px;
+        }
+
+        .table th {
+            background: linear-gradient(135deg, #6E7DFF, #00D9F1);
+            color: white;
+        }
+
+        .table td {
+            background-color: #f8f9fa;
+        }
+
+        .table tbody tr:hover {
+            background-color: #e9ecef;
+            cursor: pointer;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #007bff;
+            padding: 0;
+        }
+
+        .icon-btn:hover {
+            color: #0056b3;
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+
+        .icon-btn:focus {
+            outline: none;
+        }
+
+        .form-inline {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 250px;
+            border-radius: 25px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .table-container .pagination {
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('./navbar') %>
+    <div class="container table-container">
+        <h2 class="text-center mb-4">All Movies</h2>
+        
+        <!-- Add New Movie Button -->
+        <div class="text-right mb-3">
+            <a href="/movies/form" class="btn btn-primary btn-add">Add New Movie</a>
+        </div>
+
+        <!-- Search Bar -->
+        <form class="form-inline mb-4">
+            <input class="form-control mr-2" id="searchBar" type="text" placeholder="Search movies..." aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+
+        <!-- Movie Table -->
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through movies array and display each movie -->
+                <% 
+                    const movies = [
+                        { _id: '1', title: 'The Shawshank Redemption' },
+                        { _id: '2', title: 'The Godfather' },
+                        { _id: '3', title: 'The Dark Knight' },
+                        { _id: '4', title: 'Pulp Fiction' },
+                        { _id: '5', title: 'Forrest Gump' }
+                    ];
+                %>
+
+                <% movies.forEach(movie => { %>
+                    <tr>
+                        <td><%= movie.title %></td>
+                        <td>
+                            <!-- View Button -->
+                            <a href="/movies/view" class="icon-btn" title="View">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <!-- Edit Button -->
+                            <a href="/movies/form" class="icon-btn" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <!-- Delete Button -->
+                            <form action="" method="POST" style="display:inline;">
+                                <button type="button" class="icon-btn" title="Delete" data-toggle="modal" data-target="#deleteModal" data-id="<%= movie._id %>">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <!-- Pagination (if needed) -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+<!-- Modal for Delete Confirmation -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Movie</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this movie?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <form id="deleteForm" action="" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- <script>
+        // Function to filter the table rows based on search input
+        $(document).ready(function () {
+            $('#searchBar').on('keyup', function () {
+                var value = $(this).val().toLowerCase();
+                $('table tbody tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script> -->
+</body>
+
+</html>

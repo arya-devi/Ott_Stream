@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+    <!-- Bootstrap CSS for styling -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Body background and font styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fa;
+        }
+
+        
+
+        /* Reset Password Box Styling */
+        .reset-password-box {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            background-color: #ffffff;
+            max-width: 450px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        /* Title and Text Styling */
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .form-description {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* Form Group Styling */
+        .form-group label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: #4CC9FE;
+            box-shadow: 0 0 8px rgba(76, 201, 254, 0.6);
+        }
+
+        /* Custom Button Styling */
+        .btn-custom {
+            background-color: #4CC9FE;
+            color: white;
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #3399cc;
+            transform: translateY(-2px);
+        }
+
+        /* Back Button Styling */
+        .back-btn {
+            margin-top: 20px;
+            color: #4CC9FE;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <%- include('./navbar') %>
+
+    <div class="container">
+        <div class="reset-password-box">
+            <h2 class="title">Reset Your Password</h2>
+            <p class="form-description">Please enter your old password and new password to reset your account password.</p>
+
+            <form action="/reset-password" method="POST">
+                <!-- Old Password -->
+                <div class="form-group">
+                    <label for="oldPassword">Old Password</label>
+                    <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
+                </div>
+
+                <!-- New Password -->
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                </div>
+
+                <!-- Confirm New Password -->
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                </div>
+
+                <!-- Reset Button -->
+                <button type="submit" class="btn btn-custom btn-block">Reset Password</button>
+            </form>
+
+            <a href="#" class="back-btn">Back to Login</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

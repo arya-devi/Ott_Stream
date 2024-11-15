@@ -1,0 +1,131 @@
+/* Full page layout */
+.login-page {
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  /* Login container styling */
+  .login-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: 600px;
+    max-width: 900px;
+    width: 100%;
+  }
+  
+  /* Image styling with white background */
+  .login-image {
+    flex: 1;
+    background-color: #ffffff; /* Set white background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .login-image img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+  }
+  
+  /* Card styling for the login form */
+  .login-card {
+    flex: 1;
+    padding: 2rem 3rem;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .login-card h2 {
+    color: #333333;
+    font-weight: bold;
+    font-size: 1.75rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Form groups */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group label {
+    display: block;
+    color: #555;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    border-color: #4cc9fe;
+    box-shadow: 0 0 0 0.2rem rgba(76, 201, 254, 0.25);
+  }
+  
+  /* Submit button styling */
+  .btn-primary {
+    background-color: #4cc9fe;
+    border: none;
+    color: #fff;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0077b6;
+    box-shadow: 0 4px 10px rgba(0, 119, 182, 0.2);
+  }
+  
+  /* Sign-up link styling */
+  .signup-link {
+    color: #0077b6;
+    text-decoration: none;
+  }
+  
+  .signup-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .login-container {
+      flex-direction: column;
+    }
+    
+    .login-card {
+      max-width: 100%;
+      padding: 2rem;
+    }
+  
+    .login-image img {
+      max-width: 200px;
+    }
+  }
+  

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7fa;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .btn-back {
+            background-color: #6c757d;
+            color: white;
+            border-radius: 25px;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: #5a6268;
+        }
+
+        .movie-thumbnail {
+            max-width: 100%;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .movie-thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+        .embed-responsive {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .movie-details h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .movie-details p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-top: 15px;
+        }
+
+        .btn-favorites {
+            margin-top: 20px;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .btn-favorites:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('./navbar') %>
+
+    <div class="container mt-5">
+        <a href="/movies" class="btn btn-back btn-sm">Go Back</a>
+        <div class="card shadow-sm p-5 mt-4">
+            <div class="row">
+                <!-- Thumbnail Column (Smaller) -->
+                <div class="col-md-4 d-flex justify-content-center align-items-start">
+                    <img src="https://fps.cdnpk.net/images/home/subhome-ai.webp?w=649&h=649" class="movie-thumbnail" alt="Movie Thumbnail">
+                </div>
+                <!-- Video and Description Column (Larger) -->
+                <div class="col-md-8">
+                    <div class="embed-responsive embed-responsive-16by9 mb-4">
+                        <video controls width="100%">
+                            <source src="https://videos.pexels.com/video-files/2759477/2759477-uhd_2560_1440_30fps.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="movie-details">
+                        <h2>Movie Title</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam imperdiet orci eu turpis posuere, ut volutpat dui sodales. Vivamus vitae ipsum nec eros vulputate varius. Cras consectetur mi non sapien tincidunt, sit amet feugiat ante gravida.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

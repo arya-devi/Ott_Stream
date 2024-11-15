@@ -1,0 +1,122 @@
+/* Navbar Styles */
+.navbar {
+    background-color: #333;
+    padding: 20px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .navbar-logo h2 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* Position the hamburger menu icon on the right */
+  .navbar-menu-icon {
+    display: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    right: 55px; /* Position it on the right side */
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-item {
+    margin: 0 15px;
+  }
+  
+  .navbar-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+    margin-right: 10px;
+  }
+  
+  .navbar-link:hover {
+    color: #f31212;
+  }
+  
+  /* Shining underline effect */
+  .navbar-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #f31212;
+    left: 0;
+    bottom: -4px;
+    transition: width 0.3s;
+  }
+  
+  .navbar-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Watchlist icon */
+  .heart-icon {
+    color: #f31212; /* Gold color on hover */
+    margin-right: 8px;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-link:hover .heart-icon {
+    color: #f31212; /* Gold color on hover */
+  }
+  
+  /* Responsive Navbar */
+  @media (max-width: 768px) {
+    .navbar-container {
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+    }
+  
+    .navbar-links {
+      width: 100%;
+      flex-direction: column;
+      margin-top: 20px;
+      align-items: flex-start;
+      display: none; /* Initially hidden */
+    }
+  
+    .navbar-links.active {
+      display: block; /* Display when menu is active */
+    }
+  
+    .navbar-item {
+      margin: 10px 0;
+    }
+  
+    /* Show hamburger menu icon only on small screens */
+    .navbar-menu-icon {
+      display: block;
+    }
+  
+    .navbar-links .navbar-item {
+      text-align: left; /* Align items to the left in mobile view */
+    }
+  }
+  
