@@ -5,10 +5,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/db')
+require('dotenv').config();
+
 
 var indexRouter = require('./routes/index');
 var moviesRouter = require('./routes/movies');
 var usersRouter = require('./routes/users');
+var apiRouter = require('./routes/apiRouter');
 var app = express();
 
 // view engine setup
@@ -27,6 +30,9 @@ app.set('layout', 'layouts/main-layout');
 app.use('/', indexRouter);
  app.use('/movies', moviesRouter);
  app.use('/users', usersRouter);
+ app.use('/api', apiRouter);
+
+ 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

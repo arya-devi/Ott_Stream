@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 
 const movieSchema = new mongoose.Schema({
@@ -13,12 +14,10 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  viewCount: [
-    {
-      type: Number,
-      default: 0,
-    },
-  ],
+  viewCount: {
+    type: Number, 
+    default: 0,   
+  },
   thumbnail: [
     {
       type: String,

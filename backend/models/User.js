@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -19,16 +20,18 @@ const userSchema = new mongoose.Schema({
       ref: 'Movie',
     },
   ],
-  watchHistory: [{
-    movie:{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Movie',
+  watchHistory: [
+    {
+      movie: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Movie',
+      },
+      watchedAt: {
+        type: Date,
+        default: Date.now, // Corrected to use function reference
+      },
     },
-    watchedAt:{
-        type:Date,
-        default:Date.now()
-    },
-}],
+  ],
   isAdmin: {
     type: Boolean,
     default: false,
