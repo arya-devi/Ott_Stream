@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     { path: 'movieList', element: <MovieListPage/> },
     { path: 'WatchList', element: <WatchlistPage/> },
     { path: 'WatchHistory', element: <WatchHistoryPage/> },
-    { path: 'movie', element: <MoviePage/> },
+    { path: 'movie/:movieId', element: <MoviePage/> },
     { path: 'resetPswd', element: <ResetPasswordPage/> },
 ]);
 

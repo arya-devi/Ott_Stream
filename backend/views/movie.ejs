@@ -82,19 +82,19 @@
             <div class="row">
                 <!-- Thumbnail Column (Smaller) -->
                 <div class="col-md-4 d-flex justify-content-center align-items-start">
-                    <img src="https://fps.cdnpk.net/images/home/subhome-ai.webp?w=649&h=649" class="movie-thumbnail" alt="Movie Thumbnail">
+                    <img src="<%= movie.thumbnail %>" class="movie-thumbnail" alt="Movie Thumbnail">
                 </div>
                 <!-- Video and Description Column (Larger) -->
                 <div class="col-md-8">
                     <div class="embed-responsive embed-responsive-16by9 mb-4">
                         <video controls width="100%">
-                            <source src="https://videos.pexels.com/video-files/2759477/2759477-uhd_2560_1440_30fps.mp4" type="video/mp4">
+                            <source src="<%= movie.videoUrl %>" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
                     <div class="movie-details">
-                        <h2>Movie Title</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam imperdiet orci eu turpis posuere, ut volutpat dui sodales. Vivamus vitae ipsum nec eros vulputate varius. Cras consectetur mi non sapien tincidunt, sit amet feugiat ante gravida.</p>
+                        <h2><%= movie.title %></h2>
+                        <p><%= movie.description %></p>
                     </div>
                 </div>
             </div>

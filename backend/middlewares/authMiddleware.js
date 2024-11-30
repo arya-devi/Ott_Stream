@@ -1,29 +1,22 @@
 const jwt = require("jsonwebtoken");
 
-// Middleware to verify token
-exports.verifyToken = (req, res, next) => {
-  console.log(req.headers);
+// for verifying token for protected route
 
-  const token = req.headers?.authorization?.split(" ")[1];
+exports.verifyToken = (req, res, next) => {
+  const token = req.headers.authorization;
+  console.log(token, "hai");
 
   if (!token) {
     return res.status(401).json({ message: "Unauthorized - Missing token" });
   }
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+  jwt.verify(token.split(" ")[1], process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
-      console.log(err);
-
       return res.status(401).json({ message: "Unauthorized - Invalid token" });
     }
 
-    // Attach user ID and role to the request object for further use
     req.userId = decoded.userId;
-    console.log(req);
-    console.log(req.userId);
     req.isAdmin = decoded.isAdmin;
-    console.log(req.isAdmin);
-
     next();
   });
 };
@@ -35,4 +28,21 @@ exports.isAdmin = (req, res, next) => {
     return res.status(403).json({ message: "Forbidden - Admins only" });
   }
   next();
+};
+exports.verifyAdmin = (req, res, next) => {
+  const token = req.cookies.authToken;
+console.log("token middleware",token);
+
+  if (!token) return res.status(401).json({ error: 'Unauthorized access' });
+
+  try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.userId = decoded.id;
+      console.log(req.userId);
+      
+      console.log('hai jwt');
+      next();
+  } catch (error) {
+      res.status(403).json({ error: 'Invalid or expired token' });
+  }
 };

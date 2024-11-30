@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { FaHeart } from 'react-icons/fa'; // FontAwesome icon for Watchlist
 import './Navbar.css'; // CSS for Navbar
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const navigate = useNavigate()
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Function to toggle the menu
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
+const handleLogout=()=>{
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
+  navigate('/login');
+}
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -41,7 +46,7 @@ const Navbar = () => {
             <Link to="/resetPswd" className="navbar-link">Profile</Link>
           </li>
           <li className="navbar-item">
-            <Link to="/login" className="navbar-link">Logout</Link>
+            <Link onClick={handleLogout} className="navbar-link">Logout</Link>
           </li>
         </ul>
       </div>

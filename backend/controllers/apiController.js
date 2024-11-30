@@ -49,7 +49,7 @@ const generateSecretKey = () => {
   
       return res.status(201).json({ message: "Account created successfully" });
     } catch (error) {
-      console.error("Error during user signup:", error);
+      console.log(error);
       return res.status(500).json({ message: "Internal Server Error" });
     }
   };
@@ -66,7 +66,7 @@ const generateSecretKey = () => {
         }
         if (user.isBlocked) {
           return res
-            .status(403)
+            .status(401)
             .json({ message: "You cannot log in because your account is temporarily blocked." });
         }
         return bcrypt.compare(password, user.password).then((isPasswordValid) => {
@@ -82,7 +82,7 @@ const generateSecretKey = () => {
   
           return res
             .status(200)
-            .json({ token, message: "Successfully logged in" });
+            .json({ userId:user._id, token, message: "Successfully logged in" });
         });
       })
       .catch((err) => {
@@ -106,6 +106,7 @@ exports.getAllMovies = async (req, res) => {
 
   exports.getSingleMovie = async (req, res) => {
     const { movieId } = req.params;
+  console.log(movieId);
   
     try {
       const movie = await Movie.findById(movieId);
@@ -124,26 +125,30 @@ exports.getAllMovies = async (req, res) => {
 
   exports.manageWatchlist = async (req, res) => {
     const { movieId } = req.body;
-    const  userId  = req.userId;
+    const userId = req.userId;
     console.log(userId);
-    
   
     try {
       const user = await User.findById(userId);
       if (!user) return res.status(404).json({ message: "User not found" });
   
+      let message;
+  
       if (user.watchlist.includes(movieId)) {
         user.watchlist.pull(movieId); // Remove movie
+        message = "Removed movie from Watchlist";
       } else {
         user.watchlist.push(movieId); // Add movie
+        message = "Added movie to Watchlist";
       }
   
-      await user.save();
-      res.status(200).json({ message: "Watchlist updated", watchlist: user.watchlist });
+      await user.save(); // Save the updated user
+      res.status(200).json({ message, watchlist: user.watchlist }); // Single response
     } catch (err) {
       res.status(500).json({ message: "Internal server error", error: err.message });
     }
   };
+  
   // 6 get user watchlist
 
   exports.getWatchlist = async (req, res) => {
@@ -227,20 +232,21 @@ exports.getAllMovies = async (req, res) => {
   // 9 changePassword
 
   exports.changePassword = async (req, res) => {
-    const { oldPassword, newPassword } = req.body;
+    const { oldPassword, newPassword,confirmPassword} = req.body;
   
     try {
       const user = await User.findById(req.userId);
   
       const isValidPassword = await bcrypt.compare(oldPassword, user.password);
       if (!isValidPassword) return res.status(401).json({ message: "Old password is incorrect" });
-  
+      if(newPassword !== confirmPassword) return res.status(401).json({ message: "New password and confirm new password is incorrect" });
       const hashedPassword = await bcrypt.hash(newPassword, 10);
       user.password = hashedPassword;
       await user.save();
   
       res.status(200).json({ message: "Password updated successfully" });
     } catch (err) {
+      console.log(err);
       res.status(500).json({ message: "Internal Server Error" });
     }
   };
@@ -254,9 +260,7 @@ exports.createMovie = async (req, res) => {
     await movie.save();
     res.status(201).json({ message: "Movie created successfully", movie });
   } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Internal server error", error: err.message });
+    res.status(500).json({ message: "Internal server error", error: err.message });
   }
 };
 

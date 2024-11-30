@@ -121,23 +121,16 @@
                         <th scope="col">#</th>
                         <th scope="col">Title</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Time</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% const history = [
-                        { _id: '1', title: 'The Shawshank Redemption', date: '2024-11-01', time: '18:30' },
-                        { _id: '2', title: 'The Godfather', date: '2024-11-02', time: '20:00' },
-                        { _id: '3', title: 'The Dark Knight', date: '2024-11-03', time: '21:45' },
-                        { _id: '4', title: 'Inception', date: '2024-11-04', time: '22:15' }
-                    ]; %>
+                   
 
                     <% history.forEach((item, index) => { %>
                         <tr>
                             <th scope="row"><%= index + 1 %></th>
-                            <td><%= item.title %></td>
-                            <td><%= item.date %></td>
-                            <td><%= item.time %></td>
+                            <td><%= item.movie.title %></td>
+                            <td><%= item.watchedAt %></td>
                         </tr>
                     <% }); %>
                 </tbody>

@@ -6,9 +6,9 @@ import { RouterProvider } from 'react-router-dom';
 import router from './router';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <react.StrictMode>
+  <react>
         <RouterProvider router = {router } />
-  </react.StrictMode>
+  </react>
 );
 
 reportWebVitals();

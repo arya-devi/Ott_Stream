@@ -3,7 +3,7 @@
 
 .movie-page {
     display: flex;
-    max-width: 1000px;
+    max-width: 1500px;
     margin: 50px auto;
     padding: 20px;
     background-color: #ffffff;
@@ -23,7 +23,7 @@
 
 .movie-thumbnail {
     width: 100%;
-    max-width: 350px;
+    max-width: 250px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

@@ -78,7 +78,7 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title text-center">Admin Login</h2>
-                    <form action="/admin/login" method="POST">
+                    <form id="loginForm" method="POST">
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required>
@@ -87,7 +87,8 @@
                             <label for="password">Password</label>
                             <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
                         </div>
-                        <a href="/movies" class="btn btn-primary btn-block">Login</a>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>                        
+                        <!-- <a href="/movies" class="btn btn-primary btn-block">Login</a> -->
                     </form>
                 </div>
             </div>
@@ -100,5 +101,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<script type="module" src="javascripts/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>

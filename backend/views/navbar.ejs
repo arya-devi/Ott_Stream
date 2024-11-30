@@ -1,30 +1,56 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">OTT Streaming Platform</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container d-flex justify-content-center">
+    <!-- Brand -->
+    <a class="navbar-brand text-primary fw-bold" href="#">OTT Streaming Platform</a>
+    
+    <!-- Toggle button for mobile -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/movies">Home <span class="sr-only">(current)</span></a>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/admin/movies">
+            Home
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/users">Users</a>
+          <a class="nav-link" href="/admin/users">Users</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/profile">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/movies/report">Report</a>
+          <a class="nav-link" href="/admin/movies/view-count">Report</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/">Logout</a>
+          <a class="nav-link text-danger" href="/logout">Logout</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <form class="d-flex align-items-center">
+        <input
+          class="form-control me-2 rounded-pill"
+          type="search"
+          placeholder="Search movies, users..."
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success rounded-pill" type="submit">
+          Search
+        </button>
       </form>
     </div>
-  </nav>
+  </div>
+</nav>
+
