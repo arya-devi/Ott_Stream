@@ -1,13 +1,15 @@
 // MoviePage.js
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./MoviePage.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import checkAuth from "./CheckAuth";
 
 const MoviePage = () => {
+  const videoRef = useRef(null);
   const { movieId } = useParams();
   const [movie, setMovie] = useState({});
   console.log(movieId);
@@ -32,30 +34,40 @@ const MoviePage = () => {
           }
         );
         console.log(response.data);
-        setMovie(response.data)
+        setMovie(response.data);
       } catch (err) {
         console.log(err);
       }
     };
     getSingleMovie();
-    
+
     const addToWatchHistory = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/watch-history",{movieId},
+          "http://localhost:5000/api/watch-history",
+          { movieId },
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
         );
-        console.log(response.data);        
+        console.log(response.data);
       } catch (err) {
         console.error("Error fetching watchlist:", err);
       }
     };
     addToWatchHistory();
   }, [movieId]);
+  useEffect(() => {
+    if (movie.videoUrl && videoRef.current) {
+      console.log(movie.videoUrl);
+      
+      // Update the video source and reload the video
+      videoRef.current.src = movie.videoUrl;
+      videoRef.current.load();
+    }
+  }, [movie.videoUrl]);
   return (
     <div>
       <div className="movie-page">
@@ -73,11 +85,12 @@ const MoviePage = () => {
           <p className="movie-description">{movie.description}</p>
 
           <div className="video-player">
-            <video width="100%" controls>
-              <source
-                src={movie.videoUrl}
-                type="video/mp4"
-              />
+            <video
+              ref={videoRef}
+              className="rounded shadow w-100 h-100"
+              controls
+            >
+              <source type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
@@ -92,4 +105,4 @@ const MoviePage = () => {
   );
 };
 
-export default MoviePage;
+export default checkAuth(MoviePage);

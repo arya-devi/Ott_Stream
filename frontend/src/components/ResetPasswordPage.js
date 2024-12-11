@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import axios from "axios";
+import checkAuth from "./CheckAuth";
 
 const ResetPasswordPage = () => {
   const [data, setData] = useState({
@@ -112,4 +113,4 @@ const ResetPasswordPage = () => {
   );
 };
 
-export default ResetPasswordPage;
+export default checkAuth(ResetPasswordPage);

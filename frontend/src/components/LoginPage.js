@@ -6,7 +6,7 @@ import axios from 'axios';
 const LoginPage = () => {
   
   const navigate = useNavigate();
-  // const { msg } = useParams();
+  const { err } = useParams();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -76,6 +76,10 @@ const LoginPage = () => {
           </p>
           {message && (
             <h6 className='text-center text-danger'>{message}</h6>
+          )}
+          
+          {err && (
+            <h6 className='text-center text-danger'>{err}</h6>
           )}
         </div>
       </div>

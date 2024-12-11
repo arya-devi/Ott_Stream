@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import checkAuth from "./CheckAuth";
 
 const MovieListPage = () => {
   const navigate = useNavigate();
@@ -17,8 +18,9 @@ const MovieListPage = () => {
         const response = await axios.get("http://localhost:5000/api/movies", {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
-        console.log(response);
+        console.log(response.data.movies);
         setMovies(response.data.movies);
+        setWatchlist(response.data.movies);
       } catch (error) {
         console.log(error);
       }
@@ -47,8 +49,11 @@ const MovieListPage = () => {
   };
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-    // Add filtering logic for movies based on search query here, if needed
   };
+  // Filter movies based on the search query
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const handleFavorite = (movieId) => {
     console.log(`Added movie with ID ${movieId} to favorites`);
@@ -68,17 +73,27 @@ const MovieListPage = () => {
           />
         </div>
         <div className="movie-grid">
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie._id}
-              title={movie.title}
-              thumbnail={movie.thumbnail}
-              // onFavorite={() => handleFavorite(movie._id)}
-              onClick={() => handleSingleMovie(movie._id)}
-              isFavorite={watchlist.includes(movie._id)}
-              movieId={movie._id}
-            />
-          ))}
+          {filteredMovies.length === 0 ? (
+            <div>
+              <h5>No movies found. Please try a different search.</h5>
+              <img style={{width: '350px', height: '350px'}}
+                src="https://www.mymart.com.sa/image/no-results-found.gif" // Add the path to your image
+                alt="No Movies Found"
+              />
+            </div>
+          ) : (
+            filteredMovies.map((movie) => (
+              <MovieCard
+                key={movie._id}
+                title={movie.title}
+                thumbnail={movie.thumbnail}
+                onFavorite={() => handleFavorite(movie._id)}
+                onClick={() => handleSingleMovie(movie._id)}
+                isFavorite={watchlist.includes(movie._id)} // Check if the movie is in the watchlist
+                movieId={movie._id}
+              />
+            ))
+          )}
         </div>
       </div>
       <Footer />
@@ -86,5 +101,4 @@ const MovieListPage = () => {
   );
 };
 
-export default MovieListPage;
-
+export default checkAuth(MovieListPage);

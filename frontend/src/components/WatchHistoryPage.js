@@ -1,55 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import MovieCard from './MovieCard';
-import Navbar from './Navbar';
-import './WatchHistoryPage.css';
-import Footer from './Footer';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-
+import React, { useEffect, useState } from "react";
+import MovieCard from "./MovieCard";
+import Navbar from "./Navbar";
+import "./WatchHistoryPage.css";
+import Footer from "./Footer";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import checkAuth from "./CheckAuth";
 
 const WatchHistoryPage = () => {
-  const {movieId} = useParams()
-  const [watchedMovies, setWatchedMovies] = useState([
-    // {
-    //   id: 1,
-    //   title: 'Inception',
-    //   thumbnail: 'https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p10543523_p_v8_as.jpg',
-    //   watchDate: '2024-10-10 14:30', // Example watched date and time
-    // },
-    // {
-    //   id: 2,
-    //   title: 'Interstellar',
-    //   thumbnail: 'https://resizing.flixster.com/0xxuABVVuzJrUT130WFHKE-irEg=/ems.cHJkLWVtcy1hc3NldHMvdHZzZWFzb24vNzUyMTFhOTktZTU4Ni00ODkyLWJlYjQtZTgxYTllZmU2OGM0LmpwZw==',
-    //   watchDate: '2024-10-11 16:45', // Example watched date and time
-    // },
-    // {
-    //   id: 1,
-    //   title: 'Inception',
-    //   thumbnail: 'https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p10543523_p_v8_as.jpg',
-    //   watchDate: '2024-10-10 14:30', // Example watched date and time
-    // },
-    // {
-    //   id: 2,
-    //   title: 'Interstellar',
-    //   thumbnail: 'https://resizing.flixster.com/0xxuABVVuzJrUT130WFHKE-irEg=/ems.cHJkLWVtcy1hc3NldHMvdHZzZWFzb24vNzUyMTFhOTktZTU4Ni00ODkyLWJlYjQtZTgxYTllZmU2OGM0LmpwZw==',
-    //   watchDate: '2024-10-11 16:45', // Example watched date and time
-    // },
-    // {
-    //   id: 1,
-    //   title: 'Inception',
-    //   thumbnail: 'https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p10543523_p_v8_as.jpg',
-    //   watchDate: '2024-10-10 14:30', // Example watched date and time
-    // },
-    // {
-    //   id: 2,
-    //   title: 'Interstellar',
-    //   thumbnail: 'https://resizing.flixster.com/0xxuABVVuzJrUT130WFHKE-irEg=/ems.cHJkLWVtcy1hc3NldHMvdHZzZWFzb24vNzUyMTFhOTktZTU4Ni00ODkyLWJlYjQtZTgxYTllZmU2OGM0LmpwZw==',
-    //   watchDate: '2024-10-11 16:45', // Example watched date and time
-    // },
-  ]);
-   
+  const { movieId } = useParams();
+  const [watchedMovies, setWatchedMovies] = useState([]);
+
   useEffect(() => {
-    
     const addToWatchHistory = async () => {
       try {
         const response = await axios.get(
@@ -64,7 +26,8 @@ const WatchHistoryPage = () => {
         const movies = response.data.map((item) => ({
           title: item.movie.title,
           thumbnail: item.movie.thumbnail[0], // Access the first thumbnail if it's an array
-          watchDate: formatDate(item.watchedAt), }));
+          watchDate: formatDate(item.watchedAt),
+        }));
         setWatchedMovies(movies);
       } catch (err) {
         console.error("Error fetching watchlist:", err);
@@ -72,11 +35,13 @@ const WatchHistoryPage = () => {
     };
     addToWatchHistory();
   }, []);
- // Function to format the date
- const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-};
+  // Function to format the date
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getDate()}-${
+      date.getMonth() + 1
+    }-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+  };
   return (
     <div>
       <Navbar />
@@ -92,9 +57,9 @@ const WatchHistoryPage = () => {
           ))}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
 
-export default WatchHistoryPage;
+export default checkAuth(WatchHistoryPage);
